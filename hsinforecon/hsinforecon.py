@@ -3,6 +3,10 @@ import requests
 import socket
 import json
 
+req = requests.get("https://" + sys.argv[1])
+for head in req.headers:
+    print(head+":", req.headers[head])
+
 gethostby_ = socket.gethostbyname(sys.argv[1])
 print("\nThe IP address of "+sys.argv[1] + "is :"+gethostby_+"\n")
 
