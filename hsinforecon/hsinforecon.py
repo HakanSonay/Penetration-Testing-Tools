@@ -2,22 +2,30 @@ import sys
 import requests
 import socket
 import json
+import whois
 
-req = requests.get("https://" + sys.argv[1])
-for head in req.headers:
-    print(head+":", req.headers[head])
+print("HEADER")
+response = requests.get("https://" + sys.argv[1])
+for head in response.headers:
+    print(head+":", response.headers[head])
 
-gethostby_ = socket.gethostbyname(sys.argv[1])
-print("\nThe IP address of "+sys.argv[1] + "is :"+gethostby_+"\n")
+# whois
+print("\nWHOIS")
+response_whois = whois.query(sys.argv[1])
+for res in response_whois.__dict__:
+    print(res, response_whois.__dict__[res])
+
+ip = socket.gethostbyname(sys.argv[1])
+print("\nThe IP address of "+sys.argv[1] + "is :"+ip)
 
 # ipinfo.io
-
-req_ipinfo = requests.get("https://ipinfo.io/"+gethostby_+"/json")
-resp_ = json.loads(req_ipinfo.text)
-print("City: "+resp_["city"])
-print("Region: "+resp_["region"])
-print("Country: "+resp_["country"])
-print("Location: "+resp_["loc"])
-print("ISP: "+resp_["org"])
-print("Postal: "+resp_["postal"])
-print("Time Zone: "+resp_["timezone"])
+print("\nIPINFO")
+response_ipinfo = requests.get("https://ipinfo.io/"+ip+"/json")
+result = json.loads(response_ipinfo.text)
+print("City: "+result["city"])
+print("Region: "+result["region"])
+print("Country: "+result["country"])
+print("Location: "+result["loc"])
+print("ISP: "+result["org"])
+print("Postal: "+result["postal"])
+print("Time Zone: "+result["timezone"])
