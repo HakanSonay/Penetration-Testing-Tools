@@ -14,7 +14,7 @@ parser.add_argument('-sha3_384', help="sha3_384 hash", action='store_true')
 parser.add_argument('-sha3_512', help="sha3_512 hash", action='store_true')
 parser.add_argument('-blake2s', help="blake2s hash", action='store_true')
 parser.add_argument('-blake2b', help="blake2b hash", action='store_true')
-parser.add_argument('-all', help="all encode", action='store_true')
+parser.add_argument('-all', help="all hash", action='store_true')
 parser.add_argument('-w', dest="word", help="word", required=True)
 parsed_args = parser.parse_args()
 

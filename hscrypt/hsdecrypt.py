@@ -1,9 +1,9 @@
 import hashlib
 import argparse
 
-parser = argparse.ArgumentParser(description="MD5 Cracker")
-parser.add_argument("-hash", dest="hash", help="md5 hash")
-parser.add_argument("-w", dest="wordlist", help="wordlist", required=True)
+parser = argparse.ArgumentParser(description="DECRYPT")
+parser.add_argument("-hash", dest="hash", help="hash")
+parser.add_argument("-w", dest="wordlist", help="wordlist dict", required=True)
 parsed_args = parser.parse_args()
 
 
@@ -30,7 +30,8 @@ def main():
             for hash, arg in zip(hashes, args):
                 if hash(bytes(line, encoding="utf-8")).hexdigest() == parsed_args.hash:
                     hash_cracked = line
-                    print("Hashed : " + arg.upper() + "\nThe password is : %s" % line)
+                    print("Hashed : " + arg.upper() +
+                          "\nThe password is : %s" % line)
 
 
 if __name__ == "__main__":
